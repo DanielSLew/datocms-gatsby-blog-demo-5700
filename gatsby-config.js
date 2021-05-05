@@ -7,7 +7,7 @@ module.exports = {
   plugins: [
     'gatsby-plugin-postcss',
     {
-      resolve: "gatsby-source-datocms",
+      resolve: require.resolve(`./plugins/gatsby-source-datocms/package.json`),
       options: {
         apiToken: process.env.DATO_API_TOKEN,
         environment: process.env.DATO_ENVIRONMENT,

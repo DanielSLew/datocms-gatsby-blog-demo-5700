@@ -8,6 +8,7 @@ const { ERROR_MAP } = require("./errorMap")
  * @param {*} param1 
  */
 module.exports = async ({ reporter }, {}) => {
+  console.log('gatsby-source-dato is installed!')
   if (reporter.setErrorMap) {
     reporter.setErrorMap(ERROR_MAP)
   }
