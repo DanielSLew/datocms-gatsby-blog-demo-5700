@@ -10,7 +10,6 @@ export default function Index({ data: { allPosts, site, blog } }) {
   const heroPost = allPosts.nodes[0];
   const morePosts = allPosts.nodes.slice(1);
 
-  throw new Error()
   return (
     <Container>
       <HelmetDatoCms seo={blog.seo} favicon={site.favicon} />
