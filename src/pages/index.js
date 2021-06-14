@@ -21,7 +21,10 @@ export default function Index({ data: { allPosts, site, blog }, location }) {
 
   console.log(URL)
   console.log(query)
-  console.log(window)
+
+  if (typeof window !== "undefined") {
+    console.log(window)
+  }
   
   useEffect(() => {
     if (query.hmac) {
