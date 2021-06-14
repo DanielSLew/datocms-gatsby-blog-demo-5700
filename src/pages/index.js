@@ -17,7 +17,7 @@ export default function Index({ data: { allPosts, site, blog }, location }) {
   const redirect_uri = "https://datocmsgatsbyblogdemo570092236.gatsbyjs.io/api/callback"
   const apiKey = "d955339d700eaf37bad64ce860512823"
 
-  const URL = `https://${query.shop}.myshopify.com/admin/oauth/authorize?client_id=${apiKey}&scope=${scopes}&redirect_uri=${redirect_uri}&state=1`
+  const URL = `https://${query.shop}/admin/oauth/authorize?client_id=${apiKey}&scope=${scopes}&redirect_uri=${redirect_uri}&state=1`
 
   console.log(URL)
   console.log(query)
@@ -25,14 +25,15 @@ export default function Index({ data: { allPosts, site, blog }, location }) {
   if (typeof window !== "undefined") {
     console.log(window)
   }
-  
+
   useEffect(() => {
     if (query.hmac) {
       if (typeof window !== "undefined") {
+        console.log('here')
         window.location.assign(URL)
       }
     }
-  })
+  }, [])
 
   const config = {apiKey: apiKey, shopOrigin: query.shop};
 
