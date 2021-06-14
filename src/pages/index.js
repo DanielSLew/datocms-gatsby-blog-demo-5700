@@ -19,6 +19,10 @@ export default function Index({ data: { allPosts, site, blog }, location }) {
 
   const URL = `https://${query.shop}.myshopify.com/admin/oauth/authorize?client_id=${apiKey}&scope=${scopes}&redirect_uri=${redirect_uri}&state=1`
 
+  console.log(URL)
+  console.log(query)
+  console.log(window)
+  
   useEffect(() => {
     if (query.hmac) {
       if (typeof window !== "undefined") {
