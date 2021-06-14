@@ -6,26 +6,34 @@ import MoreStories from "../components/more-stories";
 import { HelmetDatoCms } from "gatsby-source-datocms";
 import { graphql } from "gatsby";
 
+import {Provider, TitleBar} from '@shopify/app-bridge-react';
+
+
 export default function Index({ data: { allPosts, site, blog } }) {
   const heroPost = allPosts.nodes[0];
   const morePosts = allPosts.nodes.slice(1);
 
+  const config = {apiKey: "d955339d700eaf37bad64ce860512823", shopOrigin: "gatsby-dev-500-products.myshopify.com"};
+
   return (
-    <Container>
-      <HelmetDatoCms seo={blog.seo} favicon={site.favicon} />
-      <Intro />
-      {heroPost && (
-        <HeroPost
-          title={heroPost.title}
-          coverImage={heroPost.coverImage}
-          date={heroPost.date}
-          author={heroPost.author}
-          slug={heroPost.slug}
-          excerpt={heroPost.excerpt}
-        />
-      )}
-      {morePosts.length > 0 && <MoreStories posts={morePosts} />}
-    </Container>
+    <Provider config={config} >
+      <TitleBar title="cloud test"/>
+      <Container>
+        <HelmetDatoCms seo={blog.seo} favicon={site.favicon} />
+        <Intro />
+        {heroPost && (
+          <HeroPost
+            title={heroPost.title}
+            coverImage={heroPost.coverImage}
+            date={heroPost.date}
+            author={heroPost.author}
+            slug={heroPost.slug}
+            excerpt={heroPost.excerpt}
+          />
+        )}
+        {morePosts.length > 0 && <MoreStories posts={morePosts} />}
+      </Container>
+    </Provider>
   );
 }
 
