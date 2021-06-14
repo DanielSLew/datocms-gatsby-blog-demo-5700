@@ -1,19 +1,33 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Container from "../components/container";
 import HeroPost from "../components/hero-post";
 import Intro from "../components/intro";
 import MoreStories from "../components/more-stories";
 import { HelmetDatoCms } from "gatsby-source-datocms";
 import { graphql } from "gatsby";
-
+import * as qs from "query-string"
 import {Provider, TitleBar} from '@shopify/app-bridge-react';
 
 
-export default function Index({ data: { allPosts, site, blog } }) {
+export default function Index({ data: { allPosts, site, blog }, location }) {
   const heroPost = allPosts.nodes[0];
   const morePosts = allPosts.nodes.slice(1);
+  const query = qs.parse(location.search);
+  const scopes = "read_products"
+  const redirect_uri = "https://datocmsgatsbyblogdemo570092236.gatsbyjs.io/api/callback"
+  const apiKey = "d955339d700eaf37bad64ce860512823"
 
-  const config = {apiKey: "d955339d700eaf37bad64ce860512823", shopOrigin: "gatsby-dev-500-products.myshopify.com"};
+  const URL = `https://${query.shop}.myshopify.com/admin/oauth/authorize?client_id=${apiKey}&scope=${scopes}&redirect_uri=${redirect_uri}&state=1`
+
+  useEffect(() => {
+    if (query.hmac) {
+      if (typeof window !== "undefined") {
+        window.location.assign(URL)
+      }
+    }
+  })
+
+  const config = {apiKey: apiKey, shopOrigin: query.shop};
 
   return (
     <Provider config={config} >
